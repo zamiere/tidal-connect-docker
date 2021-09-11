@@ -1,4 +1,4 @@
-# Tidal Connect Docker image for HifiBerry
+# Tidal Connect Docker image for HifiBerry (and RaspbianOS)
 
 ![hifiberry_sources](https://github.com/TonyTromp/tidal-connect-docker/blob/master/img/hifiberry_listsources.png?raw=true)
 
@@ -25,9 +25,12 @@ cd tidal-connect-docker
 
 2. Install and run
 
+For HifiBerry users just run
 ```
 ./install.sh
 ```
+
+Other PiOSi (e.g. Raspbian), you can find the docker-compose scripts in the Docker folder.
 
 ENJOY ! ;)
 
