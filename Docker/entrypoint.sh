@@ -4,13 +4,13 @@ echo "Starting Speaker Application in Background (TMUX)"
 /usr/bin/tmux new-session -d -s speaker_controller_application '/app/ifi-tidal-release/bin/speaker_controller_application'
 
 
-echo "Starting Tidal Connect.."
+echo "Starting TIDAL Connect.."
 /app/ifi-tidal-release/bin/tidal_connect_application \
    --tc-certificate-path "/app/ifi-tidal-release/id_certificate/IfiAudio_ZenStream.dat" \
-   -f "Hifiberry Tidal Connect" \
+   -f "HiFiBerry" \
    --codec-mpegh true \
    --codec-mqa false \
-   --model-name "Hifiberry Tidal Connect" \
+   --model-name "HiFiBerry" \
    --disable-app-security false \
    --disable-web-security false \
    --enable-mqa-passthrough false \
@@ -21,4 +21,4 @@ echo "Starting Tidal Connect.."
 #/app/ifi-tidal-release/bin/speaker_controller_application 
 
 
-echo "Tidal Connect Container Stopped.."
+echo "TIDAL Connect Container Stopped.."

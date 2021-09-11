@@ -14,22 +14,15 @@ As I didnt want to add yet another system for Tidal integration (e.g. Bluesound,
 1. SSH into your Raspberry and clone/copy this repository onto your system. 
 ```
 # On HifiberryOS
-curl https://codeload.github.com/TonyTromp/tidal-connect-docker/zip/refs/heads/master >tidal-connect-docker.zip
-unzip tidal-connect-docker.zip
-
-# On Raspbian
 git clone https://github.com/TonyTromp/tidal-connect-docker.git
-
+cd tidal-connect-docker
 ```
 
 2. Install and run
 
 ```
-cd tidal-connect-docker
 ./install.sh
 ```
-
-
 
 # *** Other Stuff *** #
 
