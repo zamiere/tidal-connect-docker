@@ -107,15 +107,14 @@ cd tidal-connect-docker-master/Docker
 ./build_docker.sh
 ```
 
+* Fiddle with Audio Controls and Song Info scraping *
 
-List Devices
+Check out the 'cmd' folder for a bunch of cool bash scripts to control your music (hence you can use to control via Alexa/Google etc).
+To scrape song info you can try
 ```
-docker run -ti \
---device /dev/snd \
--v /var/run/dbus:/var/run/dbus \
--v /var/run/avahi-daemon/socket:/var/run/avahi-daemon/socket \
---entrypoint /app/ifi-tidal-release/bin/ifi-pa-devs-get edgecrush3r/tidal-connect
+python scraper.py
 ```
+This will give you all song info in JSON format.
 
 # Tweaking and tuning configuration
 If you need to alter any parameters, just change the entrypoint.sh to contain whatever settinsgs you need
