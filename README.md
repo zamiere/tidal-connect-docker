@@ -1,8 +1,6 @@
 # Tidal Connect Docker image (for RaspberryPi)
 
-hifiberry_listsources.png  hifiberry_tidalcontrol.png
-
-![hifiberry_sources](https://github.com/TonyTromp/tidal-connect-docker/blob/master/hifiberry_listsources.png?raw=true)
+![hifiberry_sources](https://github.com/TonyTromp/tidal-connect-docker/blob/master/img/hifiberry_listsources.png?raw=true)
 
 
 Image based on https://github.com/shawaj/ifi-tidal-release and https://github.com/seniorgod/ifi-tidal-release. 
@@ -37,6 +35,8 @@ In addition it will also add a new UI Source to HifiBerry called TIDAL Connect w
 
 You can either start or stop the TIDAL Service via the HifiBerry Sources menu or via command-line.
 If you rather use command line, you might find these scripts handy.
+
+![hifiberry_startstop](https://github.com/TonyTromp/tidal-connect-docker/blob/master/img/hifiberry_tidalcontrol.png?raw=true)
 
 ```
 ./start-tidal-service.sh
