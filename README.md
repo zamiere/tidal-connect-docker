@@ -1,4 +1,4 @@
-# Tidal Connect Docker image (for RaspberryPi)
+# Tidal Connect Docker image for HifiBerry
 
 ![hifiberry_sources](https://github.com/TonyTromp/tidal-connect-docker/blob/master/img/hifiberry_listsources.png?raw=true)
 
