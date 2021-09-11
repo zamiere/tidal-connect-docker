@@ -11,6 +11,9 @@ Please visit https://www.raspberrypi.org/forums/viewtopic.php?t=297771 for full 
 I have been hapilly using HifiberryOS but beeing an extremely slim OS (based on Buildroot) has its pitfalls, that there is no easy way of extending its current features. Thankfully the Hifiberry Team have blessed us by providing Docker and Docker-Compose within OS.
 As I didnt want to add yet another system for Tidal integration (e.g. Bluesound, Volumio), i stumbled upon this https://support.hifiberry.com/hc/en-us/community/posts/360013667717-Tidal-Connect-, and i decided to do something about it. 
 
+This port does much more than just providing the docker image with TIDAL Connect and volume control, as for HifiBerry users it will also install additional sources meny as displayed above.
+Volume controls are reflected in the UI.
+
 # Installation
 
 1. SSH into your Raspberry and clone/copy this repository onto your system. 
@@ -45,6 +48,11 @@ If you rather use command line, you might find these scripts handy.
 
 4. Trouble shooting
 
+* NO VOLUME *
+Please check your volume setting on your device and use your device to increase the volume. 
+If setup/dac is recognized it you will see volume changes also updating in the HifiBerry Audio Controls.
+
+* DAC NOT RECOGNIZED / NOT PLAYING *
 There are known issues whereas playback is not working, as the DAC is not recognized.
 You can check the logs from the Docker image by running:
 ```
@@ -68,8 +76,18 @@ For 'HifiBerry Digi+ Pro', if it doesnt work out-of-the-box, you will need to ed
    --enable-mqa-passthrough false \
    --log-level 3 \
    --enable-websocket-log "0" \
-
 ```
+
+Note you can list/print your device/DAC name by running the following command
+```
+docker run -ti \
+--device /dev/snd \
+-v /var/run/dbus:/var/run/dbus \
+-v /var/run/avahi-daemon/socket:/var/run/avahi-daemon/socket \
+--entrypoint /app/ifi-tidal-release/bin/ifi-pa-devs-get edgecrush3r/tidal-connect
+```
+
+Edit the entryfile.sh and set the playback-device accordingly should solve your issue.
 
 # *** Other Stuff *** #
 
@@ -86,29 +104,6 @@ cd tidal-connect-docker-master/Docker
 ./build_docker.sh
 ```
 
-
-Running as daemon without using docker-compose 
-```
- docker run -td \
- --network="host" \
- --dns 8.8.8.8 \
- --device /dev/snd \
- -v /var/run/dbus:/var/run/dbus \
- edgecrush3r/tidal-connect:latest 
-
-```
-
-# Debugging
-
-```
-docker run -ti \
- --network="host" \
- --dns 8.8.8.8 \
- --device /dev/snd \
- -v /var/run/dbus:/var/run/dbus \
- edgecrush3r/tidal-connect \
- /bin/bash
-```
 
 List Devices
 ```
