@@ -1,7 +1,9 @@
 version: '2.2'
 services:
   tidal-connect:
-    image: edgecrush3r/tidal-connect:latest
+    env_file:
+      - .env
+    image: ${DOCKER_IMAGE}
     tty: true
     network_mode: host
     devices:
@@ -11,4 +13,4 @@ services:
       - /var/run/dbus:/var/run/dbus
     restart: always
     dns:
-      - 8.8.8.8
+      - ${DOCKER_DNS}
