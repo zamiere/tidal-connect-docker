@@ -9,11 +9,11 @@ echo "Starting TIDAL Connect.."
    --tc-certificate-path "/app/ifi-tidal-release/id_certificate/IfiAudio_ZenStream.dat" \
    -f "${FRIENDLY_NAME}" \
    --codec-mpegh true \
-   --codec-mqa false \
+   --codec-mqa ${MQA_CODEC} \
    --model-name "${MODEL_NAME}" \
    --disable-app-security false \
    --disable-web-security false \
-   --enable-mqa-passthrough false \
+   --enable-mqa-passthrough ${MQA_PASSTHROUGH} \
    --log-level 3 \
    --enable-websocket-log "0" \
    

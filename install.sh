@@ -14,6 +14,8 @@ running_environment()
   echo "  DOCKER_DNS:               ${DOCKER_DNS}"
   echo "  DOCKER_IMAGE:             ${DOCKER_IMAGE}"
   echo "  BUILD_OR_PULL:            ${BUILD_OR_PULL}"
+  echo "  MQA_PASSTHROUGH:          ${MQA_PASSTHROUGH}"
+  echo "  MQA_CODEC:                ${MQA_CODEC}"
   echo "  PWD:                      ${PWD}"
   echo ""
 }
@@ -25,16 +27,22 @@ usage()
   echo "Usage: "
   echo ""
   echo "  [FRIENDLY_NAME=<FRIENDLY_NAME>] \\"
-  echo "  [MODEL_NAME=<MODEL_NAME> ] \\"
-  echo "  [BEOCREATE_SYMLINK_FOLDER=<BEOCREATE_SYMLINK_FOLDER> ] \\"
-  echo "  [DOCKER_DNS=<DOCKER_DNS> ] \\"
+  echo "  [MODEL_NAME=<MODEL_NAME>] \\"
+  echo "  [BEOCREATE_SYMLINK_FOLDER=<BEOCREATE_SYMLINK_FOLDER>] \\"
+  echo "  [DOCKER_DNS=<DOCKER_DNS>] \\"
+  echo "  [DOCKER_IMAGE=<DOCKER_IMAGE>] \\"
+  echo "  [BUILD_OR_PULL=<build|pull>] \\"
+  echo "  [MQA_PASSTHROUGH=<true|false>] \\"
+  echo "  [MQA_CODEC=<true|false>] \\"
   echo "  $0 \\"
   echo "    [-f <FRIENDLY_NAME>] \\"
   echo "    [-m <MODEL_NAME>] \\"
   echo "    [-b <BEOCREATE_SYMLINK_FOLDER>] \\"
   echo "    [-d <DOCKER_DNS>] \\"
   echo "    [-i <Docker Image>] \\"
-  echo "    [-p <build|pull>]"
+  echo "    [-p <build|pull>] \\"
+  echo "    [-t <true|false>] \\"
+  echo "    [-c <true|false>"
   echo ""
   echo "Defaults:"
   echo "  FRIENDLY_NAME:            ${FRIENDLY_NAME_DEFAULT}"
@@ -43,11 +51,14 @@ usage()
   echo "  DOCKER_DNS:               ${DOCKER_DNS_DEFAULT}"
   echo "  DOCKER_IMAGE:             ${DOCKER_IMAGE_DEFAULT}"
   echo "  BUILD_OR_PULL:            ${BUILD_OR_PULL_DEFAULT}"
+  echo "  MQA_PASSTHROUGH:          ${MQA_PASSTHROUGH_DEFAULT}"
+  echo "  MQA_CODEC:                ${MQA_CODEC_DEFAULT}"
   echo ""
 
   echo "Example: "
   echo "  BUILD_OR_PULL=build \\"
   echo "  DOCKER_IMAGE=tidal-connect:latest \\"
+  echo "  MQA_PASSTHROUGH=true \\"
   echo "  $0"
   echo ""
 
@@ -66,6 +77,8 @@ BEOCREATE_SYMLINK_FOLDER_DEFAULT="/opt/beocreate/beo-extensions/tidal"
 DOCKER_DNS_DEFAULT="8.8.8.8"
 DOCKER_IMAGE_DEFAULT="edgecrush3r/tidal-connect:latest"
 BUILD_OR_PULL_DEFAULT="pull"
+MQA_PASSTHROUGH_DEFAULT="false"
+MQA_CODEC_DEFAULT="false"
 
 # override defaults with environment variables, if they have been set
 FRIENDLY_NAME=${FRIENDLY_NAME:-${FRIENDLY_NAME_DEFAULT}}
@@ -74,12 +87,14 @@ BEOCREATE_SYMLINK_FOLDER=${BEOCREATE_SYMLINK_FOLDER:-${BEOCREATE_SYMLINK_FOLDER_
 DOCKER_DNS=${DOCKER_DNS:-${DOCKER_DNS_DEFAULT}}
 DOCKER_IMAGE=${DOCKER_IMAGE:-${DOCKER_IMAGE_DEFAULT}}
 BUILD_OR_PULL=${BUILD_OR_PULL:-${BUILD_OR_PULL_DEFAULT}}
+MQA_PASSTHROUGH=${MQA_PASSTHROUGH:-${MQA_PASSTHROUGH_DEFAULT}}
+MQA_CODEC=${MQA_CODEC:-${MQA_CODEC_DEFAULT}}
 
 HELP=${HELP:-0}
 VERBOSE=${VERBOSE:-0}
 
 # override with command line parameters, if defined
-while getopts "hvf:m:b:d:i:p:" option
+while getopts "hvf:m:b:d:i:p:t:c:" option
 do
   case ${option} in
     f)
@@ -99,6 +114,12 @@ do
       ;;
     p)
       BUILD_OR_PULL=${OPTARG}
+      ;;
+    t)
+      MQA_PASSTHROUGH=${OPTARG}
+      ;;
+    c)
+      MQA_CODEC=${OPTARG}
       ;;
     v)
       VERBOSE=1
@@ -168,9 +189,12 @@ then
 fi
 
 log INFO "Creating .env file."
-> Docker/.env
-echo "FRIENDLY_NAME=${FRIENDLY_NAME}" >> Docker/.env
-echo "MODEL_NAME=${MODEL_NAME}" >> Docker/.env
+ENV_FILE="Docker/.env"
+> ${ENV_FILE}
+echo "FRIENDLY_NAME=${FRIENDLY_NAME}" >> ${ENV_FILE}
+echo "MODEL_NAME=${MODEL_NAME}" >> ${ENV_FILE}
+echo "MQA_PASSTHROUGH=${MQA_PASSTHROUGH}" >> ${ENV_FILE}
+echo "MQA_CODEC=${MQA_CODEC}" >> ${ENV_FILE}
 log INFO "Finished creating .env file."
 
 # Generate docker-compose.yml
