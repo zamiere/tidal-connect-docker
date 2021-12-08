@@ -1,4 +1,5 @@
 #!/bin/bash
 echo ""
-echo "Starting Tidal Connect Service..."
+echo "Starting TIDAL Connect Service."
 systemctl start tidal.service
+echo "Finished starting TIDAL Connect Service."

@@ -9,12 +9,12 @@ WorkingDirectory=${PWD}/Docker/
 Type=oneshot
 RemainAfterExit=yes
 
-ExecStartPre=/bin/docker-compose pull --quiet
+#ExecStartPre=/bin/docker-compose pull --quiet
 ExecStart=/bin/docker-compose up -d
 
 ExecStop=/bin/docker-compose down
 
-ExecReload=/bin/docker-compose pull --quiet
+#ExecReload=/bin/docker-compose pull --quiet
 ExecReload=/bin/docker-compose up -d
 
 [Install]
