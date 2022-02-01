@@ -228,13 +228,18 @@ then
   fi
 fi
 
+if [ "$(docker ps -q -f name=tidal_connect)" ]; then
+  log INFO "Stopping Tidal Container.."
+  ./stop-tidal-service.sh
+fi
+
 log INFO "Select audio output device"
 select_playback_device
 echo ${PLAYBACK_DEVICE}
 
 log INFO "Creating .env file."
-ENV_FILE="Docker/.env"
-CONFIG_FILE="CONFIG"
+ENV_FILE="${PWD}/Docker/.env"
+CONFIG_FILE="${PWD}/Docker/CONFIG"
 
 > ${ENV_FILE}
 echo "FRIENDLY_NAME=${FRIENDLY_NAME}" >> ${ENV_FILE}
@@ -245,8 +250,12 @@ echo "PLAYBACK_DEVICE=${PLAYBACK_DEVICE}" >> ${ENV_FILE}
 log INFO "Finished creating .env file."
 
 log INFO "Create config symlink -> ${ENV_FILE}"
-[ -e "${CONFIG_FILE}" ] && rm "${CONFIG_FILE}"
+[ -e "${CONFIG_FILE}" ]] && rm "${CONFIG_FILE}"
 ln -s ${ENV_FILE} ${CONFIG_FILE}
+
+#make sure to use vars as known in file
+#not needed anymore
+#source ${ENV_FILE}
 
 # Generate docker-compose.yml
 log INFO "Generating docker-compose.yml."

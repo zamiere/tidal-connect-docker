@@ -1,6 +1,6 @@
 #!/bin/sh
 
-CONFIG_FILE=./CONFIG
+CONFIG_FILE=./Docker/CONFIG
 
 ARRAY_DEVICES=()
 DEVICES=$(docker exec -ti tidal_connect /app/ifi-tidal-release/bin/ifi-pa-devs-get 2>/dev/null | grep device#)

@@ -6,7 +6,7 @@ echo "Starting Speaker Application in Background (TMUX)"
 echo "Starting TIDAL Connect.."
 /app/ifi-tidal-release/bin/tidal_connect_application \
    --tc-certificate-path "/app/ifi-tidal-release/id_certificate/IfiAudio_ZenStream.dat" \
-   --playback-device "${PLAYBACK_DEVICE}"
+   --playback-device "${PLAYBACK_DEVICE}" \
    -f "${FRIENDLY_NAME}" \
    --codec-mpegh true \
    --codec-mqa ${MQA_CODEC} \
