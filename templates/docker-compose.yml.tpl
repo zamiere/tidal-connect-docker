@@ -1,6 +1,7 @@
 version: '2.2'
 services:
   tidal-connect:
+    container_name: tidal_connect
     env_file:
       - .env
     image: ${DOCKER_IMAGE}

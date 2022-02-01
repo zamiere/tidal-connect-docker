@@ -240,12 +240,13 @@ For 'HifiBerry Digi+ Pro', if it doesn't work out-of-the-box, you will need to e
 
 Note you can list/print your device/DAC name by running the following command
 ```
-docker run -ti \
---device /dev/snd \
--v /var/run/dbus:/var/run/dbus \
--v /var/run/avahi-daemon/socket:/var/run/avahi-daemon/socket \
---entrypoint /app/ifi-tidal-release/bin/ifi-pa-devs-get edgecrush3r/tidal-connect
+docker run --device /dev/snd \
+  -v /var/run/dbus:/var/run/dbus \
+  -v /var/run/avahi-daemon/socket:/var/run/avahi-daemon/socket \
+  --entrypoint "" \
+  edgecrush3r/tidal-connect /app/ifi-tidal-release/bin/ifi-pa-devs-get 2>/dev/null | grep device#
 ```
+
 
 Edit the entryfile.sh and set the playback-device accordingly should solve your issue.
 

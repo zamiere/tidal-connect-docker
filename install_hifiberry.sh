@@ -70,6 +70,45 @@ usage()
   echo ""
 }
 
+select_playback_device()
+{
+  ARRAY_DEVICES=()
+  DEVICES=$(docker run --device /dev/snd \
+    --entrypoint "" \
+    edgecrush3r/tidal-connect \
+    /app/ifi-tidal-release/bin/ifi-pa-devs-get 2>/dev/null | grep device#)
+
+  echo ""
+  echo "Found output devices..."
+  echo ""
+  #make newlines the only separator
+  IFS=$'\n'
+  re_parse="^device#([0-9])+=(.*)$"
+  for line in $DEVICES
+  do
+    if [[ $line =~ $re_parse ]]
+    then
+      device_num="${BASH_REMATCH[1]}"
+      device_name="${BASH_REMATCH[2]}"
+
+      echo "${device_num}=${device_name}"
+      ARRAY_DEVICES+=( ${device_name} )
+    fi
+  done
+
+  while :; do
+    read -ep 'Choose your output Device (0-9): ' number
+    [[ $number =~ ^[[:digit:]]+$ ]] || continue
+    (( ( (number=(10#$number)) <= 9999 ) && number >= 0 )) || continue
+    # Here I'm sure that number is a valid number in the range 0..9999
+    # So let's break the infinite loop!
+    break
+  done
+
+  PLAYBACK_DEVICE="${ARRAY_DEVICES[$number]}"
+}
+
+
 # define defaults
 FRIENDLY_NAME_DEFAULT=${HOSTNAME}
 MODEL_NAME_DEFAULT=${HOSTNAME}
@@ -79,6 +118,7 @@ DOCKER_IMAGE_DEFAULT="edgecrush3r/tidal-connect:latest"
 BUILD_OR_PULL_DEFAULT="pull"
 MQA_PASSTHROUGH_DEFAULT="false"
 MQA_CODEC_DEFAULT="false"
+PLAYBACK_DEVICE="default"
 
 # override defaults with environment variables, if they have been set
 FRIENDLY_NAME=${FRIENDLY_NAME:-${FRIENDLY_NAME_DEFAULT}}
@@ -188,14 +228,25 @@ then
   fi
 fi
 
+log INFO "Select audio output device"
+select_playback_device
+echo ${PLAYBACK_DEVICE}
+
 log INFO "Creating .env file."
 ENV_FILE="Docker/.env"
+CONFIG_FILE="CONFIG"
+
 > ${ENV_FILE}
 echo "FRIENDLY_NAME=${FRIENDLY_NAME}" >> ${ENV_FILE}
 echo "MODEL_NAME=${MODEL_NAME}" >> ${ENV_FILE}
 echo "MQA_PASSTHROUGH=${MQA_PASSTHROUGH}" >> ${ENV_FILE}
 echo "MQA_CODEC=${MQA_CODEC}" >> ${ENV_FILE}
+echo "PLAYBACK_DEVICE=${PLAYBACK_DEVICE}" >> ${ENV_FILE}
 log INFO "Finished creating .env file."
+
+log INFO "Create config symlink -> ${ENV_FILE}"
+[ -e "${CONFIG_FILE}" ] && rm "${CONFIG_FILE}"
+ln -s ${ENV_FILE} ${CONFIG_FILE}
 
 # Generate docker-compose.yml
 log INFO "Generating docker-compose.yml."
