@@ -3,7 +3,7 @@
 import os
 import subprocess
 
-cmd='docker exec -ti docker_tidal-connect_1 /usr/bin/tmux capture-pane -pS -10'
+cmd='docker exec -ti tidal_connect /usr/bin/tmux capture-pane -pS -10'
 
 stdout = subprocess.check_output(cmd.split());
 
