@@ -249,13 +249,12 @@ echo "MQA_CODEC=${MQA_CODEC}" >> ${ENV_FILE}
 echo "PLAYBACK_DEVICE=${PLAYBACK_DEVICE}" >> ${ENV_FILE}
 log INFO "Finished creating .env file."
 
+if [ -L "${CONFIG_FILE}" ]; then
+ log INFO "${CONFIG_FILE} already exists. this file will be replaced with new configuration."
+ rm "${CONFIG_FILE}"
+fi
 log INFO "Create config symlink -> ${ENV_FILE}"
-[ -e "${CONFIG_FILE}" ]] && rm "${CONFIG_FILE}"
 ln -s ${ENV_FILE} ${CONFIG_FILE}
-
-#make sure to use vars as known in file
-#not needed anymore
-#source ${ENV_FILE}
 
 # Generate docker-compose.yml
 log INFO "Generating docker-compose.yml."
@@ -264,7 +263,6 @@ log INFO "Finished generating docker-compose.yml."
 
 # Enable service
 log INFO  "Enabling TIDAL Connect Service."
-#cp systemd/tidal.service /etc/systemd/system/
 eval "echo \"$(cat templates/tidal.service.tpl)\"" >/etc/systemd/system/tidal.service
 
 systemctl enable tidal.service
@@ -279,7 +277,7 @@ if [ -L "${BEOCREATE_SYMLINK_FOLDER}" ]; then
   rm ${BEOCREATE_SYMLINK_FOLDER}
 fi
 
-echo  "Adding TIDAL Connect Source to Beocreate UI."
+log INFO "Adding TIDAL Connect Source to Beocreate UI."
 ln -s ${PWD}/beocreate/beo-extensions/tidal ${BEOCREATE_SYMLINK_FOLDER}
 log INFO "Finished adding TIDAL Connect Source to Beocreate."
 
@@ -294,6 +292,6 @@ log INFO "Starting TIDAL Connect Service."
 ./start-tidal-service.sh
 
 log INFO "Restarting Beocreate 2 Service."
-./restart_beocreate2.sh
+./restart_beocreate2
 
 log INFO "Finished, exiting."

@@ -8,3 +8,5 @@ ln -s ${PWD}/tidalcontrol.py ${DST_PLAYER_FILE}
 echo "NOTE - THIS IS STILL WORK IN PROGRESS"
 echo ""
 echo "You will need to manually setup /opt/audiocontrol2/audiocontrol2.py"
+echo ""
+echo "* PLEASE CHECK THE README FOR FURTHER INSTRUCTIONS *"
