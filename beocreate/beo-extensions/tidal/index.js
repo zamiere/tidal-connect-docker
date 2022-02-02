@@ -125,22 +125,22 @@ var fs = require("fs");
 	
 	function settidalStatus(enabled, callback) {
 		if (enabled) {
-			exec("systemctl start --now tidal.service").on('exit', function(code) {
+			exec("systemctl enable --now tidal.service").on('exit', function(code) {
 				if (code == 0) {
 					settings.tidalEnabled = true;
-					if (debug) console.log("Roon enabled.");
+					if (debug) console.log("TIDAL Connect enabled.");
 					callback(true);
 				} else {
-					roonEnabled = false;
+					settings.tidalEnabled = false;
 					callback(false, true);
 				}
 			});
 		} else {
-			exec("systemctl stop --now tidal.service").on('exit', function(code) {
+			exec("systemctl disable --now tidal.service").on('exit', function(code) {
 				settings.tidalEnabled = false;
 				if (code == 0) {
 					callback(false);
-					if (debug) console.log("Roon disabled.");
+					if (debug) console.log("TIDAL Connect disabled.");
 				} else {
 					callback(false, true);
 				}
