@@ -13,6 +13,10 @@ As I didn't want to add yet another system for Tidal integration (e.g. Bluesound
 This port does much more than just providing the docker image with TIDAL Connect and volume control, as for HifiBerry users it will also install additional sources meny as displayed above.
 Volume controls are reflected in the UI.
 
+# Known issues
+
+* Remote volume control (via IOS/Android) is not working on Hifiberry DAC2 Pro. This DAC seems to use hardware mixer for audio and this doesnt seem to be compatible with the speaker_controller app. This issue is under investigation (https://github.com/TonyTromp/tidal-connect-docker/issues/6)
+
 # Installation
 
 1. SSH into your Raspberry and clone/copy this repository onto your system. 
