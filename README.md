@@ -31,7 +31,7 @@ cd /data && \
 
 ```
 # On HifiBerryOS
-./install.sh
+./install_hifiberry.sh
 ```
 
 
@@ -44,7 +44,7 @@ In addition it will also add a new UI Source to HifiBerry called TIDAL Connect w
 
 ## Usage
 ```
-./install.sh installs TIDAL Connect on your Raspberry Pi.
+./install_hifiberry.sh installs TIDAL Connect on your Raspberry Pi.
 
 Usage: 
 
@@ -52,7 +52,7 @@ Usage:
   [MODEL_NAME=<MODEL_NAME> ] \
   [BEOCREATE_SYMLINK_FOLDER=<BEOCREATE_SYMLINK_FOLDER> ] \
   [DOCKER_DNS=<DOCKER_DNS> ] \
-  ./install.sh \
+  ./install_hifiberry.sh \
     [-f <FRIENDLY_NAME>] \
     [-m <MODEL_NAME>] \
     [-b <BEOCREATE_SYMLINK_FOLDER>] \
@@ -71,7 +71,7 @@ Defaults:
 Example: 
   BUILD_OR_PULL=build \
   DOCKER_IMAGE=tidal-connect:latest \
-  ./install.sh
+  ./install_hifiberry.sh
 
 Running environment: 
   FRIENDLY_NAME:            hifiberry
@@ -91,7 +91,7 @@ which take precedence over defaults.
 This is an example from a Raspberry Pi that was configured with the hostname `hifipi1`.
 
 ```
-# ./install.sh 
+# ./install_hifiberry.sh
 Running environment: 
   FRIENDLY_NAME:            hifipi1
   MODEL_NAME:               hifipi1
@@ -157,7 +157,7 @@ This is an example where we specified to `install.sh` that it should build the i
 ```
 #   BUILD_OR_PULL=build \
 >   DOCKER_IMAGE=tidal-connect:latest \
->   ./install.sh
+>   ./install_hifiberry.sh
 Running environment: 
   FRIENDLY_NAME:            hifipi1
   MODEL_NAME:               hifipi1
