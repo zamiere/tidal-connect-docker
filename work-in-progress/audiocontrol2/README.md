@@ -72,3 +72,8 @@ The result is that, if you start this service as background job (e.g. systemctl 
 * Audio Controll Api Reference
 https://github.com/hifiberry/audiocontrol2/blob/master/doc/api.md
 
+** NOTE TO SELF: I will make a daemon which will scrape and keep track of state, independendly from the AudioController (this because Threading doesnt seem to play nicely and scraping from docker using TMUX is too slow). The daemon will scrape state in seperate thread and then update ENV vars that can be accessed globally. 
+The audiocontrol2 will simply only read the ENV vars.
+
+
+
