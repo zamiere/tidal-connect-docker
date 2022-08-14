@@ -12,10 +12,10 @@ The result is that, if you start this service as background job (e.g. systemctl 
 
 * Installation
 
-1. You can either run the ./install.sh script or create the symbolic link manually.
+You can either run the ./install.sh script or add the following modifications manually
 
    ```
-   # create symbolic link to add TidalController to AudioControl2 daemon
+1. Create symbolic link to add TidalController to AudioControl2 daemon
    ln -s ${PWD}/tidalcontrol.py /opt/audiocontrol2/ac2/players/tidalcontrol.py
    ```
 2. go and edit the file and initialize the player
@@ -60,11 +60,7 @@ The result is that, if you start this service as background job (e.g. systemctl 
 5. Testing
    ```
    # Stop AudioControl2 Daemon
-   systemctl stop audiocontrol2
-
-   # Start AudioControl2 in the foreground 
-   # (NOTE due to threading bug this is needed)
-   python3 /opt/audiocontrol2/audiocontrol2.py
+   systemctl restart audiocontrol2
    ```
 
 6. Done!!!... Now open your HifiBerryOS webpage and start a song... you should see track metadata in the player. (controls from WEBUI still needs to be implemted. Controls work via Phone.)
@@ -74,6 +70,3 @@ https://github.com/hifiberry/audiocontrol2/blob/master/doc/api.md
 
 ** NOTE TO SELF: I will make a daemon which will scrape and keep track of state, independendly from the AudioController (this because Threading doesnt seem to play nicely and scraping from docker using TMUX is too slow). The daemon will scrape state in seperate thread and then update ENV vars that can be accessed globally. 
 The audiocontrol2 will simply only read the ENV vars.
-
-
-
