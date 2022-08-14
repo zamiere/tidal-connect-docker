@@ -143,7 +143,7 @@ class TidalControl(PlayerControl):
 
     def tmux_scraper(self):
         logging.info('tidalcontrol::tmux_scraper')
-        cmd='docker exec -ti tidal_connect /usr/bin/tmux capture-pane -pS -10'
+        cmd='docker exec -t tidal_connect /usr/bin/tmux capture-pane -pS -10'
         stdout = subprocess.check_output(cmd.split());
         WINDOW_SIZE=40
         WINDOW_COUNT=2
