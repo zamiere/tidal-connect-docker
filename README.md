@@ -1,3 +1,9 @@
+*NOTE This project has become obsolete and can no longer be supported.*
+
+Tidal has revoked the certificate used by this project and therefore it can not longer connect to the Tidal Service.
+It was a matter of borrowed time, as the binaries appeared on GitHub but were never (probarbly) intended to be released.
+As I am not pursuing any official Tidal Certificate (unless Tidal opens up to Opensource Developers), this project is marked obsolete.
+
 # Tidal Connect Docker image for HifiBerry (and RaspbianOS)
 
 ![hifiberry_sources](img/hifiberry_listsources.png?raw=true)
