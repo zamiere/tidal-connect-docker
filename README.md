@@ -1,7 +1,9 @@
 
-Please help me through this morning, and 
+Please help me through this morning, and
+
 <a href="https://www.buymeacoffee.com/tonytromp" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
-Thanks for your support :heart: ❤️!
+
+Thanks for your support :heart:
 
 # Tidal Connect Docker image for HifiBerry (and RaspbianOS)
 
