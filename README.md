@@ -1,8 +1,7 @@
-*NOTE This project has become obsolete and can no longer be supported.*
 
-Tidal has revoked the certificate used by this project and therefore it can not longer connect to the Tidal Service.
-It was a matter of borrowed time, as the binaries appeared on GitHub but were never (probarbly) intended to be released.
-As I am not pursuing any official Tidal Certificate (unless Tidal opens up to Opensource Developers), this project is marked obsolete.
+Please help me through this morning, and 
+<a href="https://www.buymeacoffee.com/tonytromp" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
+Thanks for your support :heart: ❤️!
 
 # Tidal Connect Docker image for HifiBerry (and RaspbianOS)
 
