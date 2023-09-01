@@ -1,7 +1,7 @@
 FROM raspbian/stretch
 
 RUN apt-get update -y -q && apt-get upgrade -y -q
-RUN apt install -y -q multiarch-support libavformat57 git libportaudio2* libflac++6v5* libavahi-common3 libavahi-client3 alsa-utils curl
+RUN apt install -y -q multiarch-support libavformat57 git libportaudio2* libflac++6v5* libavahi-common3 libavahi-client3 alsa-utils curl build-essential portaudio19-dev
 
 #libcurl3 -y 
 RUN mkdir -p /app/ifi-tidal-release
@@ -22,6 +22,8 @@ COPY Docker/src/play .
 COPY Docker/src/id_certificate id_certificate
 COPY Docker/src/licenses licenses
 RUN chmod a+x bin/* 
+
+ENV PA_ALSA_PLUGHW=1
 
 COPY Docker/entrypoint.sh /
 RUN chmod a+x /entrypoint.sh

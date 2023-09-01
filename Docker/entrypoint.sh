@@ -6,14 +6,13 @@ echo "Starting Speaker Application in Background (TMUX)"
 echo "Starting TIDAL Connect.."
 /app/ifi-tidal-release/bin/tidal_connect_application \
    --tc-certificate-path "/app/ifi-tidal-release/id_certificate/IfiAudio_ZenStream.dat" \
-   --playback-device "${PLAYBACK_DEVICE}" \
-   -f "${FRIENDLY_NAME}" \
+   -f "HiFiBerry" \
    --codec-mpegh true \
-   --codec-mqa ${MQA_CODEC} \
-   --model-name "${MODEL_NAME}" \
+   --codec-mqa false \
+   --model-name "HiFiBerry" \
    --disable-app-security false \
    --disable-web-security false \
-   --enable-mqa-passthrough ${MQA_PASSTHROUGH} \
+   --enable-mqa-passthrough false \
    --log-level 3 \
    --enable-websocket-log "0" \
    
