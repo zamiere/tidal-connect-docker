@@ -1,7 +1,18 @@
 FROM raspbian/stretch
 
-RUN apt-get update -y -q && apt-get upgrade -y -q
-RUN apt install -y -q multiarch-support libavformat57 git libportaudio2* libflac++6v5* libavahi-common3 libavahi-client3 alsa-utils curl build-essential portaudio19-dev
+RUN echo 'deb http://archive.raspberrypi.org/debian/ stretch main' > /etc/apt/sources.list && \
+    echo 'deb http://legacy.raspbian.org/raspbian stretch main contrib non-free rpi firmware' >> /etc/apt/sources.list && \
+    echo 'deb-src http://legacy.raspbian.org/raspbian stretch main contrib non-free rpi firmware' >> /etc/apt/sources.list
+
+# Add [trusted=yes] to disable the GPG check temporarily for snapshot repositories
+RUN sed -i 's/^deb /deb [trusted=yes] /' /etc/apt/sources.list
+RUN sed -i 's/^deb-src /deb-src [trusted=yes] /' /etc/apt/sources.list
+
+RUN apt-get -o Acquire::Check-Valid-Until=false update -y -q
+RUN apt-get upgrade -y -q --allow-unauthenticated
+
+#RUN apt-get update -y -q && apt-get upgrade -y -q --allow-unauthentcated
+RUN apt install --fix-missing --fix-broken -y -q multiarch-support git  libavformat57 libportaudio2* libflac++6v5* libavahi-common3 libavahi-client3 alsa-utils curl portaudio19-dev neovim zsh
 
 #libcurl3 -y 
 RUN mkdir -p /app/ifi-tidal-release
