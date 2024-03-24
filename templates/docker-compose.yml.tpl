@@ -12,6 +12,8 @@ services:
     volumes:
       - ./entrypoint.sh:/entrypoint.sh
       - /var/run/dbus:/var/run/dbus
+      - /etc/asound.conf:/etc/asound.conf
+      - /etc/alsa:/etc/alsa
     restart: always
     dns:
       - ${DOCKER_DNS}
