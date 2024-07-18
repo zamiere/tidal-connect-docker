@@ -1,0 +1,3 @@
+#!/bin/bash
+
+docker exec -ti tidal_connect bash
