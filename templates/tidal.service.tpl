@@ -11,9 +11,8 @@ RemainAfterExit=yes
 #ExecStartPre=/bin/docker-compose pull --quiet
 ExecStart=/bin/docker-compose up -d --no-recreate
 
-ExecStop=/bin/docker-compose down
+ExecStop=/bin/docker-compose stop
 
-#ExecReload=/bin/docker-compose pull --quiet
 ExecReload=/bin/docker-compose up -d --no-recreate
 
 [Install]
